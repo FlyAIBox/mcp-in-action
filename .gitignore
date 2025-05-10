@@ -175,3 +175,5 @@ cython_debug/
 
 # MCP 演示程序
 mcp_demo/venv_mcp_demo/
+mcp-rag/milvus-mcp-server/env-mcp-rag/share/man/man1/isympy.1
+mcp-rag/env-mcp-rag/share/man/man1/isympy.1

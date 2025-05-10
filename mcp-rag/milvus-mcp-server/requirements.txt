@@ -8,6 +8,5 @@ pydantic==2.11.3
 sentence-transformers==4.1.0
 numpy==2.2.5
 httpx==0.28.1
-torch==2.7.0
 transformers==4.51.3
 scikit-learn==1.6.1

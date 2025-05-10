@@ -10,7 +10,7 @@ Python 3.10.12
 2. 创建虚拟环境（可选但推荐）：
 ```bash
 python -m venv env-mcp-rag
-source env-mcp-rag/bin/activate  # 在 Windows 上: venv\Scripts\activate
+source env-mcp-rag/bin/activate
 ```
 
 3. 安装依赖：

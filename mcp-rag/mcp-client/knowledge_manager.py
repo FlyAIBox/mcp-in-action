@@ -56,17 +56,19 @@ class MCPClient:
         建立与MCP服务器的连接，包含重试机制
         """
         max_retries = 5
-        retry_delay = 2  # seconds
+        base_delay = 2  # seconds
+        max_delay = 32  # maximum delay in seconds
         
         for attempt in range(max_retries):
             try:
+                print(f"Attempting to connect to MCP server (attempt {attempt + 1}/{max_retries})...")
                 self._client = sse_client(self.host, timeout=10)  # 创建SSE客户端，设置超时时间为10秒
                 # 使用异步上下文管理器栈(exit_stack)进入SSE客户端的异步上下文
                 stdio_transport = await self.exit_stack.enter_async_context(self._client)  # 进入异步上下文并获取传输对象
                 read, write = stdio_transport  # 解包获取读写通道
                 
-                # Add a short delay to ensure server initialization is complete
-                await asyncio.sleep(1)
+                # Add a delay to ensure server initialization is complete
+                await asyncio.sleep(2)
                 
                 self.session = await self.exit_stack.enter_async_context(ClientSession(read, write))  # 创建并进入客户端会话
                 
@@ -76,9 +78,10 @@ class MCPClient:
                 return
             except Exception as e:
                 if attempt < max_retries - 1:
+                    delay = min(base_delay * (2 ** attempt), max_delay)
                     print(f"Connection attempt {attempt + 1} failed: {e}")
-                    print(f"Retrying in {retry_delay} seconds...")
-                    await asyncio.sleep(retry_delay)
+                    print(f"Retrying in {delay} seconds...")
+                    await asyncio.sleep(delay)
                 else:
                     print(f"Failed to connect after {max_retries} attempts: {e}")
                     raise

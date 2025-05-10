@@ -54,8 +54,12 @@ class MilvusMCPServer(FastMCP):
         """Override run method to add startup event handling"""
         # Log startup event directly
         logger.info("MCP Server startup event")
-        # Set server as ready before running
-        self.is_ready = True
+        
+        # Ensure all tools are registered and services are ready
+        if not self.is_ready:
+            logger.warning("Server not ready - waiting for initialization")
+            asyncio.get_event_loop().run_until_complete(self.ready_for_connections())
+            
         logger.info("MCP Server is ready for connections")
         
         # Call parent run method

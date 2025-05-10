@@ -23,7 +23,7 @@
 
 1. 进入项目目录：
 ```bash
-cd milvus-mcp-server
+cd mcp-rag/milvus-mcp-server
 ```
 
 2. 启动所有服务：
@@ -65,12 +65,17 @@ docker compose up -d etcd minio standalone
 
 2. 创建 Python 虚拟环境：
 ```bash
+# 回到mcp-rag目录
+cd ..
 python -m venv env-mcp-rag
-source env-mcp-rag/bin/activate  # Windows 上使用: env-mcp-rag\Scripts\activate
+source env-mcp-rag/bin/activate
 ```
 
 3. 安装依赖：
 ```bash
+# 安装 PyTorch CPU 版本
+pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
+# 其他依赖
 pip install -r requirements.txt
 ```
 
