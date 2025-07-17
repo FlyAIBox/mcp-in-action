@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/flyaibox-mcp-in-action-badge.png)](https://mseep.ai/app/flyaibox-mcp-in-action)
+
 # MCP In Action
 
 ![GitHub stars](https://img.shields.io/github/stars/FlyAIBox/mcp-in-action?style=social)
